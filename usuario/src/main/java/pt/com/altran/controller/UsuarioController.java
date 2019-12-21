@@ -45,7 +45,7 @@ public class UsuarioController {
 			final UriComponentsBuilder uriBuilder) throws UsuarioJaCadastradoException {
 
 		final UsuarioDTO usuarioGravado = facade.salvar(usuario);
-		final URI uri = uriBuilder.path("/usuario/{email}").buildAndExpand(usuarioGravado.getId()).toUri();
+		final URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuarioGravado.getId()).toUri();
 
 		return ResponseEntity.created(uri).body(usuarioGravado);
 	}
