@@ -6,16 +6,31 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import pt.com.altran.dto.ErroDTO;
-import pt.com.altran.exception.ItemNaoEncontradoException;
+import pt.com.altran.exception.CarrinhoNaoEncontradoException;
+import pt.com.altran.exception.ItemInvalidoException;
+import pt.com.altran.exception.ItemNaoRemovidoDoCarrinhoException;
+import pt.com.altran.exception.UsuarioInvalidoException;
+import pt.com.altran.exception.UsuarioJaPossuiCarrinhoException;
 
 @RestControllerAdvice
-public class ItemControllerHandler {
+public class CarrinhoControllerHandler {
 
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
 	@ExceptionHandler({
-		ItemNaoEncontradoException.class
+		CarrinhoNaoEncontradoException.class,
+		ItemNaoRemovidoDoCarrinhoException.class
 	})
-	public ErroDTO tratarItemNaoEncontradoException(final Exception exception) {
+	public ErroDTO tratarNotFound(final Exception exception) {
+		return this.obterErro(exception);
+	}
+
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	@ExceptionHandler({
+		UsuarioJaPossuiCarrinhoException.class,
+		UsuarioInvalidoException.class,
+		ItemInvalidoException.class
+	})
+	public ErroDTO tratarBadRequest(final Exception exception) {
 		return this.obterErro(exception);
 	}
 

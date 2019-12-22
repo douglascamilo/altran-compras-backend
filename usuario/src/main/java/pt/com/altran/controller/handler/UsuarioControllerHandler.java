@@ -28,6 +28,14 @@ public class UsuarioControllerHandler {
 		return this.obterErro(exception);
 	}
 
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler({
+		Exception.class
+	})
+	public ErroDTO tratarInternalServerError(final Exception exception) {
+		return this.obterErro(exception);
+	}
+
 	private ErroDTO obterErro(final Exception exception) {
 		return ErroDTO.builder()
 				.mensagem(exception.getMessage())
