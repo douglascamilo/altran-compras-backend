@@ -46,7 +46,7 @@ public class ItemController {
 		return ResponseEntity.created(uri).body(itemGravado);
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	public ResponseEntity<ItemDTO> atualizar(
 			@PathVariable("id") final String id,
 			@RequestBody final ItemDTO item) throws ItemNaoEncontradoException {
