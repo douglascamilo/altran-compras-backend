@@ -51,4 +51,8 @@ public class UsuarioService {
 	public List<Usuario> buscarTodos() {
 		return repository.findAll();
 	}
+
+	public List<Usuario> buscarPorFiltro(final String filtro) {
+		return repository.findByNome(filtro);
+	}
 }

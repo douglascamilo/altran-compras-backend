@@ -41,6 +41,15 @@ public class UsuarioFacade {
 
 	public List<UsuarioDTO> buscarTodos() {
 		final List<Usuario> usuarios = service.buscarTodos();
+		return this.converterParaListaDto(usuarios);
+	}
+
+	public List<UsuarioDTO> buscarPorFiltro(final String filtro) {
+		final List<Usuario> usuarios = service.buscarPorFiltro(filtro);
+		return this.converterParaListaDto(usuarios);
+	}
+
+	private List<UsuarioDTO> converterParaListaDto(final List<Usuario> usuarios) {
 		return usuarios.stream()
 				.map(conversor::converterParaDto)
 				.collect(Collectors.toList());

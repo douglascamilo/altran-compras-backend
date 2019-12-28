@@ -37,6 +37,14 @@ public class UsuarioController {
 		return ResponseEntity.ok(usuario);
 	}
 
+	@GetMapping("/filtro/{filtro}")
+	public ResponseEntity<List<UsuarioDTO>> buscarPorFiltro(
+			@PathVariable("filtro") final String filtro) throws UsuarioNaoEncontradoException {
+
+		final List<UsuarioDTO> listaUsuarios = facade.buscarPorFiltro(filtro);
+		return ResponseEntity.ok(listaUsuarios);
+	}
+
 	@PostMapping
 	public ResponseEntity<UsuarioDTO> salvar(
 			@RequestBody final UsuarioDTO usuario,
