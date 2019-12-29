@@ -38,7 +38,7 @@ public class CarrinhoFacade {
 		return criarCarrinhoService.executar(usuarioId);
 	}
 
-	public void adicionarItem(final CarrinhoDTO carrinho, final ItemDTO item)
+	public void gravarItem(final CarrinhoDTO carrinho, final ItemDTO item)
 			throws CarrinhoNaoEncontradoException, ItemInvalidoException, UsuarioInvalidoException {
 
 		usuarioService.isValido(carrinho.getUsuarioId());

@@ -40,8 +40,8 @@ public class CarrinhoController {
 		return ResponseEntity.created(null).body(carrinhoGravado);
 	}
 
-	@PutMapping("/adicionar-item")
-	public ResponseEntity<Void> adicionarItem(
+	@PutMapping("/gravar-item")
+	public ResponseEntity<Void> gravarItem(
 			@RequestParam("carrinhoId") final String carrinhoId,
 			@RequestParam("usuarioId") final String usuarioId,
 			@RequestBody final ItemDTO item)
@@ -52,7 +52,7 @@ public class CarrinhoController {
 				.usuarioId(usuarioId)
 				.build();
 
-		facade.adicionarItem(carrinho, item);
+		facade.gravarItem(carrinho, item);
 		return ResponseEntity.ok().build();
 	}
 
