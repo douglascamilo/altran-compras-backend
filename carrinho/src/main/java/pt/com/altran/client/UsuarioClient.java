@@ -11,6 +11,6 @@ import pt.com.altran.dto.UsuarioDTO;
 @FeignClient(name = "usuario")
 public interface UsuarioClient {
 
-	@GetMapping("/usuario/{id}")
+	@GetMapping("/{id}")
 	public Optional<UsuarioDTO> buscarPorId(@PathVariable("id") final String id);
 }

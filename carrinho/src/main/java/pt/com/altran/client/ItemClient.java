@@ -11,6 +11,6 @@ import pt.com.altran.dto.ItemDTO;
 @FeignClient(value = "item", decode404 = true)
 public interface ItemClient {
 
-	@GetMapping("/item/{id}")
+	@GetMapping("/{id}")
 	public Optional<ItemDTO> buscarPorId(@PathVariable("id") String itemId);
 }
