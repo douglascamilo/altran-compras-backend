@@ -13,6 +13,7 @@ import pt.com.altran.exception.ItemNaoRemovidoDoCarrinhoException;
 import pt.com.altran.exception.UsuarioInvalidoException;
 import pt.com.altran.exception.UsuarioJaPossuiCarrinhoException;
 import pt.com.altran.service.AdicionarItemCarrinhoService;
+import pt.com.altran.service.BuscarCarrinhoService;
 import pt.com.altran.service.CriarCarrinhoService;
 import pt.com.altran.service.ItemService;
 import pt.com.altran.service.RemoverItemCarrinhoService;
@@ -23,9 +24,14 @@ public class CarrinhoFacade {
 	@Autowired private CriarCarrinhoService criarCarrinhoService;
 	@Autowired private AdicionarItemCarrinhoService adicionarItemCarrinhoService;
 	@Autowired private RemoverItemCarrinhoService removerItemCarrinhoService;
+	@Autowired private BuscarCarrinhoService buscarCarrinhoService;
 
 	@Autowired private UsuarioService usuarioService;
 	@Autowired private ItemService itemService;
+
+	public CarrinhoDTO buscar(final String usuarioId) throws CarrinhoNaoEncontradoException {
+		return buscarCarrinhoService.executar(usuarioId);
+	}
 
 	public CarrinhoDTO criar(final String usuarioId) throws UsuarioJaPossuiCarrinhoException, UsuarioInvalidoException {
 		usuarioService.isValido(usuarioId);

@@ -19,6 +19,13 @@ public interface CarrinhoService<ENTRADA, SAIDA> {
 				.orElseThrow(CarrinhoNaoEncontradoException::new);
 	}
 
+	default Carrinho buscarPorIdUsuarioComExcecao(final CarrinhoRepository repository, final String usuarioId)
+			throws CarrinhoNaoEncontradoException {
+
+		return repository.findByUsuarioId(usuarioId)
+				.orElseThrow(CarrinhoNaoEncontradoException::new);
+	}
+
 	default void buscarComExcecao(final CarrinhoRepository repository, final String usuarioId)
 			throws UsuarioJaPossuiCarrinhoException {
 
