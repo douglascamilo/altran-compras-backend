@@ -19,9 +19,12 @@ public class ItemFacade {
 
 	public List<ItemDTO> buscarTodos() {
 		final List<Item> itens = service.buscarTodos();
-		return itens.stream()
-				.map(conversor::converterParaDto)
-				.collect(Collectors.toList());
+		return this.converterItensParaDto(itens);
+	}
+
+	public List<ItemDTO> buscarPorFiltro(final String filtro) {
+		final List<Item> itens = service.buscarPorFiltro(filtro);
+		return this.converterItensParaDto(itens);
 	}
 
 	public ItemDTO buscarPorId(final String id) throws ItemNaoEncontradoException {
@@ -43,5 +46,11 @@ public class ItemFacade {
 
 	public void excluir(final String id) throws ItemNaoEncontradoException {
 		service.excluir(id);
+	}
+
+	private List<ItemDTO> converterItensParaDto(final List<Item> itens) {
+		return itens.stream()
+				.map(conversor::converterParaDto)
+				.collect(Collectors.toList());
 	}
 }

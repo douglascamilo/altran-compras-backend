@@ -35,6 +35,14 @@ public class ItemController {
 		return ResponseEntity.ok(item);
 	}
 
+	@GetMapping("/filtro/{filtro}")
+	public ResponseEntity<List<ItemDTO>> buscarPorFiltro(
+			@PathVariable("filtro") final String filtro) {
+
+		final List<ItemDTO> itens = facade.buscarPorFiltro(filtro);
+		return ResponseEntity.ok(itens);
+	}
+
 	@PostMapping
 	public ResponseEntity<ItemDTO> salvar(
 			@RequestBody final ItemDTO item,

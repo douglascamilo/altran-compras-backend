@@ -20,6 +20,10 @@ public class ItemService {
 		return repository.findAll();
 	}
 
+	public List<Item> buscarPorFiltro(final String filtro) {
+		return repository.findByNome(filtro);
+	}
+
 	public Item buscarPorId(final String id) throws ItemNaoEncontradoException {
 		return buscarPorIdComExcecao(id);
 	}
