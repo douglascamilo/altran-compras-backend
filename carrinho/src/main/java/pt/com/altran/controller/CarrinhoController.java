@@ -32,6 +32,15 @@ public class CarrinhoController {
 		return ResponseEntity.ok(carrinhoEncontrado);
 	}
 
+	@GetMapping("/fechar")
+	public ResponseEntity<CarrinhoDTO> fecharCarrinho(
+			@RequestParam("carrinhoId") final String carrinhoId,
+			@RequestParam("usuarioId") final String usuarioId) {
+
+		final CarrinhoDTO carrinho = facade.fecharCarrinho(carrinhoId, usuarioId);
+		return ResponseEntity.ok(carrinho);
+	}
+
 	@PostMapping("/criar")
 	public ResponseEntity<CarrinhoDTO> criar(
 			@RequestParam("usuarioId") final String usuarioId) throws UsuarioJaPossuiCarrinhoException, UsuarioInvalidoException {

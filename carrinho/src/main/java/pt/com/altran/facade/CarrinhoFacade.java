@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import pt.com.altran.dto.AdicionarItemCarrinhoDTO;
 import pt.com.altran.dto.CarrinhoDTO;
+import pt.com.altran.dto.EntradaFecharCarrinhoDTO;
 import pt.com.altran.dto.EntradaRemoverItemCarrinhoDTO;
 import pt.com.altran.dto.ItemDTO;
 import pt.com.altran.exception.CarrinhoNaoEncontradoException;
@@ -15,6 +16,7 @@ import pt.com.altran.exception.UsuarioJaPossuiCarrinhoException;
 import pt.com.altran.service.AdicionarItemCarrinhoService;
 import pt.com.altran.service.BuscarCarrinhoService;
 import pt.com.altran.service.CriarCarrinhoService;
+import pt.com.altran.service.FecharCarrinhoService;
 import pt.com.altran.service.ItemService;
 import pt.com.altran.service.RemoverItemCarrinhoService;
 import pt.com.altran.service.UsuarioService;
@@ -25,12 +27,22 @@ public class CarrinhoFacade {
 	@Autowired private AdicionarItemCarrinhoService adicionarItemCarrinhoService;
 	@Autowired private RemoverItemCarrinhoService removerItemCarrinhoService;
 	@Autowired private BuscarCarrinhoService buscarCarrinhoService;
+	@Autowired private FecharCarrinhoService fecharCarrinhoService;
 
 	@Autowired private UsuarioService usuarioService;
 	@Autowired private ItemService itemService;
 
 	public CarrinhoDTO buscar(final String usuarioId) throws CarrinhoNaoEncontradoException {
 		return buscarCarrinhoService.executar(usuarioId);
+	}
+
+	public CarrinhoDTO fecharCarrinho(final String carrinhoId, final String usuarioId) {
+		final EntradaFecharCarrinhoDTO entrada = EntradaFecharCarrinhoDTO.builder()
+			.carrinhoId(carrinhoId)
+			.usuarioId(usuarioId)
+			.build();
+
+		return fecharCarrinhoService.executar(entrada);
 	}
 
 	public CarrinhoDTO criar(final String usuarioId) throws UsuarioJaPossuiCarrinhoException, UsuarioInvalidoException {
